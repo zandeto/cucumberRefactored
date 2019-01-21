@@ -5,7 +5,7 @@ import cucumber.api.java.Before;
 
 public class Hook {
 
-    @Before
+  @Before
     public void StartBrowser(){
         System.out.println("Opening the browser: MOCK" + '\n');
     }
