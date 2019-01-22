@@ -1,50 +1,79 @@
 package steps;
 
-import cucumber.api.java.en.*;
+import static org.testng.Assert.assertEquals;
 
+import java.io.IOException;
+import java.nio.file.Paths;
+import java.util.concurrent.TimeUnit;
+import org.openqa.selenium.Alert;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+import cucumber.api.java.After;
+import cucumber.api.java.Before;
+import cucumber.api.java.en.And;
+import cucumber.api.java.en.Given;
+import cucumber.api.java.en.Then;
+import cucumber.api.java.en.When;
 
 public class LoginSteps {
+	WebDriver driver;
+	
+	@Before()
+	public void setup() throws IOException {
+		String driverPath = null;
+		driverPath = Paths.get("chromedriver.exe").toAbsolutePath().toString();
+		System.setProperty("webdriver.chrome.driver", driverPath);
+		System.out.println("The taken driver path is: " + driverPath);
+		this.driver = new ChromeDriver();
+		this.driver.manage().window().maximize();
+		this.driver.manage().timeouts().pageLoadTimeout(120, TimeUnit.SECONDS);
+	}
+	
+	@After()
+	public void tearDown() {
+		driver.manage().deleteAllCookies();
+		driver.close();
+		driver.quit();
+	}
+	
+	
+	@Given("^user navigates to \"([^\"]*)\"$")
+	public void user_navigates_to(String url) throws Throwable {
+		driver.get(url);  //http://www.webdriveruniversity.com/
+	}
 
-    @Given("^User navigates to stackoverflow website$")
-    public void user_navigates_to_stackoverflow_website() throws Throwable {
+	@When("^user clicks on the login portal button$")
+	public void user_clicks_on_the_login_portal_button() throws Throwable {
+		driver.findElement(By.id("login-portal")).click();
+	}
 
-        System.out.println("User navigates to stackoverflow website" + '\n');
+	@And("^user enters the \"([^\"]*)\" username$")
+	public void user_enters_the_username(String username) throws Throwable {
+		//tab code
+		for (String windHandle : driver.getWindowHandles()) {
+			driver.switchTo().window(windHandle);
+		}
+		//send username keys
+		driver.findElement(By.id("text")).sendKeys(username);
 
-    }
+	}
 
-    @And("^User clicks on the login button on homepage$")
-    public void user_clicks_on_the_login_button_on_homepage() throws Throwable {
+	@And("^user enter the \"([^\"]*)\" password$")
+	public void user_enter_the_password(String password) throws Throwable {
+		driver.findElement(By.id("password")).sendKeys(password);	
+	}
 
-        System.out.println("User clicks on the login button on homepage" + '\n');
+	@When("^user clicks on the login button$")
+	public void user_clicks_on_the_login_button() throws Throwable {
+		driver.findElement(By.id("login-button")).click();
+	}
 
-    }
-
-    @And("^User enters a valid username$")
-    public void user_enters_a_valid_username() throws Throwable {
-
-        System.out.println("User enters a valid username" + '\n');
-
-    }
-
-    @And("^User enters a valid password$")
-    public void user_enters_a_valid_password() throws Throwable {
-
-        System.out.println("User enters a valid password" + '\n');
-
-    }
-
-    @When("^User clicks on the login button$")
-    public void user_clicks_on_the_login_button() throws Throwable {
-
-        System.out.println("User clicks on the login button" + '\n');
-
-    }
-
-    @Then("^User should be taken to the successful login page$")
-    public void user_should_be_taken_to_the_successful_login_page() throws Throwable {
-
-        System.out.println("User should be taken to the successful login page" + '\n');
-
-    }
-
+	@Then("^the user should be presented with the following prompt alert \"([^\"]*)\"$")
+	public void the_user_should_be_presented_with_the_following_prompt_alert(String message) throws Throwable {
+		Alert alert = driver.switchTo().alert(); //Alert	
+		assertEquals(alert.getText().toString().toLowerCase().replaceAll("\\s", ""),
+				message.toLowerCase().replaceAll("\\s", ""));
+		alert.accept();
+	}
 }

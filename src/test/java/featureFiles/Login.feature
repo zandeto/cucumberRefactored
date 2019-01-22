@@ -1,11 +1,16 @@
 Feature: Login into account
-  Existing user should be able to login to account using correct credentials
+
+  @Login
+  Scenario Outline: Login to account with credentials
+    Given user navigates to "<url>"
+    When user clicks on the login portal button
+    And user enters the "<username>" username
+    And user enter the "<password>" password
+    When user clicks on the login button
+    Then the user should be presented with the following prompt alert "<message>"
 
 
-  Scenario: Login to account with correct credentials
-    Given User navigates to stackoverflow website
-    And User clicks on the login button on homepage
-    And User enters a valid username
-    And User enters a valid password
-    When User clicks on the login button
-    Then User should be taken to the successful login page
+    Examples:
+      | url                                 | username   | password     | message              |
+      | http://www.webdriveruniversity.com/ | webdriver3 | wendriver    | validation failed    |
+      | http://www.webdriveruniversity.com/ | webdriver  | webdriver123 | validation succeeded |
