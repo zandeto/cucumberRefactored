@@ -12,12 +12,13 @@ import org.junit.runner.RunWith;
 
 @CucumberOptions (
         features = {"src/test/java/featureFiles/"},
-        glue = {"steps"},
+        glue = {"stepsDefinitions"},
         monochrome = true,
-        tags = {"@Login"},
+        tags = {},
         plugin = {"pretty", "html:target/cucumberReports", "json:target/cucumber.json",
                 "com.cucumber.listener.ExtentCucumberFormatter:target/report.html"}
 )
 
 public class MainRunner extends AbstractTestNGCucumberTests {
+
 }
