@@ -1,7 +1,6 @@
 package stepsDefinitions;
 
 
-
 import cucumber.api.DataTable;
 
 import cucumber.api.java.en.*;
@@ -29,7 +28,7 @@ public class ContactUsSteps extends DriverFactory {
 
     @When("^I enter a valid last name$")
     public void i_enter_a_valid_last_name(DataTable table) throws Exception {
-        contactUsPage.enterLastName(table, 0,1);
+        contactUsPage.enterLastName(table, 0, 1);
     }
 
     @When("^I enter a valid email address$")
@@ -39,8 +38,8 @@ public class ContactUsSteps extends DriverFactory {
 
     @When("^I enter comments$")
     public void i_enter_comments(DataTable table) throws Exception {
-        contactUsPage.enterComments(table, 0,0);
-        contactUsPage.enterComments(table, 0,1);
+        contactUsPage.enterComments(table, 0, 0);
+        contactUsPage.enterComments(table, 0, 1);
     }
 
     @When("^I click on the submit button$")
