@@ -45,7 +45,6 @@ public class ContactUsPage extends BasePage {
     public ContactUsPage enterComments(DataTable table, int row, int column) throws Exception {
         List<List<String>> data = table.raw();
         sendKeysToWebElement(textfield_Message, data.get(row).get(column));
-        //sendKeysToWebElement(textfield_Message, data.get(row).get(column));
         return new ContactUsPage();
     }
 

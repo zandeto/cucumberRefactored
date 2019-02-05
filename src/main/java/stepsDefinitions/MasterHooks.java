@@ -32,7 +32,7 @@ public class MasterHooks extends DriverFactory {
 
             }
         } catch (Exception e) {
-            System.out.println("Methods failed: tearDown, Exceprion: " + e.getMessage());
+            System.out.println("Methods failed: tearDown, Exception: " + e.getMessage());
         }
     }
 

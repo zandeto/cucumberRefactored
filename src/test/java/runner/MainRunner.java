@@ -7,7 +7,10 @@ import cucumber.api.junit.Cucumber;
 import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.junit.runner.RunWith;
 import org.testng.annotations.AfterClass;
+import pageObjects.BasePage;
+
 import java.io.File;
+import java.io.IOException;
 
 
 @RunWith(Cucumber.class)
@@ -23,8 +26,9 @@ import java.io.File;
 
 public class MainRunner extends AbstractTestNGCucumberTests {
     @AfterClass
-    public static void writeExtentReport(){
+    public static void writeExtentReport() throws IOException {
         Reporter.loadXMLConfig(new File(System.getProperty("user.dir") + "\\src\\main\\java\\utils\\ReportsConfig.xml"));
+        BasePage.copyLatestExtentReport();
     }
 
 }
