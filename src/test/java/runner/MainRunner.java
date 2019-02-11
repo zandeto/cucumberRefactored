@@ -8,7 +8,6 @@ import cucumber.api.testng.AbstractTestNGCucumberTests;
 import org.junit.runner.RunWith;
 import org.testng.annotations.AfterClass;
 import pageObjects.BasePage;
-
 import java.io.File;
 import java.io.IOException;
 
@@ -19,7 +18,7 @@ import java.io.IOException;
         features = {"src/test/java/featureFiles/"},
         glue = {"stepsDefinitions"},
         monochrome = true,
-        tags = {},
+        tags = {"~@ignored"},
         plugin = {"pretty", "html:target/cucumberReports", "json:target/cucumber.json",
                 "com.cucumber.listener.ExtentCucumberFormatter:output/report.html"}
 )

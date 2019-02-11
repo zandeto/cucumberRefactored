@@ -3,6 +3,7 @@ package stepsDefinitions;
 import cucumber.api.java.en.*;
 import org.junit.Assert;
 import org.openqa.selenium.By;
+import pageObjects.ProductsPage;
 import utils.DriverFactory;
 
 import java.io.IOException;
@@ -21,7 +22,7 @@ public class ProductSteps extends DriverFactory {
         basePage.waitAndClickElementUsingByLocator(By.cssSelector(locator));
     }
 
-    @Then("^user should be presented with promo alert$")
+    @Then("^user should be presented with the correct promo alert$")
     public void user_should_be_presented_with_promo_alert() throws InterruptedException, IOException {
         productsPage.clickOnProceedButton_PopUp();
     }

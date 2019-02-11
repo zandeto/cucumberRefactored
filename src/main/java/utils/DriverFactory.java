@@ -1,7 +1,5 @@
 package utils;
 
-import gherkin.ast.ScenarioOutline;
-import org.openqa.selenium.Capabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -28,8 +26,9 @@ public class DriverFactory {
             FileInputStream fi = new FileInputStream(System.getProperty("user.dir") + "\\src\\main\\java\\properties\\config.properties");
             p.load(fi);
             String browserName = p.getProperty("browser");
+            //String browserName = "chrome";
 
-            
+
             switch (browserName) {
                 case "firefox":
                     System.setProperty("webdriver.gecko.driver", Constant.GECKO_DRIVER_DIRECTORY);
@@ -40,10 +39,10 @@ public class DriverFactory {
 
                     break;
                 case "chrome":
-                        System.setProperty("webdriver.chrome.driver", Constant.CHROME_DRIVER_DIRECTORY);
-                        //CHROME OPTIONS
-                        driver = new ChromeDriver();
-                        driver.manage().window().maximize();
+                    System.setProperty("webdriver.chrome.driver", Constant.CHROME_DRIVER_DIRECTORY);
+                    //CHROME OPTIONS
+                    driver = new ChromeDriver();
+                    driver.manage().window().maximize();
                     break;
 
             }

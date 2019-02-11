@@ -4,6 +4,7 @@ import java.awt.AWTException;
 import java.io.*;
 import java.util.Date;
 import java.util.List;
+
 import com.cucumber.listener.Reporter;
 import org.apache.commons.io.FileUtils;
 import org.junit.Assert;
@@ -53,7 +54,7 @@ public class BasePage extends DriverFactory {
                 clicked = true;
             } catch (Exception e) {
                 System.out.println("Unable to wait and click on the element using the By locator, Exception: " + e.getMessage());
-                Assert.fail("Unable to wait and click on the element using the By locator, element: " + "<"+ by.toString() + ">");
+                Assert.fail("Unable to wait and click on the element using the By locator, element: " + "<" + by.toString() + ">");
             }
             attempts++;
         }
@@ -78,7 +79,7 @@ public class BasePage extends DriverFactory {
             final WebDriverWait customWait = new WebDriverWait(driver, timeout);
             customWait.until(ExpectedConditions.refreshed(ExpectedConditions.elementToBeClickable(locator)));
             locator.click();
-            System.out.println("Successfully clicked on the WebElement, using locator: " + "<" + locator + ">"+ ", using a custom Timeout of: " + timeout);
+            System.out.println("Successfully clicked on the WebElement, using locator: " + "<" + locator + ">" + ", using a custom Timeout of: " + timeout);
         } catch (Exception e) {
             System.out.println("Unable to click on the WebElement, using locator: " + "<" + locator + ">" + ", using a custom Timeout of: " + timeout);
             Assert.fail("Unable to click on the WebElement, Exception: " + e.getMessage());
@@ -124,7 +125,7 @@ public class BasePage extends DriverFactory {
         } catch (StaleElementReferenceException elementUpdated) {
             WebElement elementToClick = driver.findElement(element);
             ob.moveToElement(elementToClick).click().build().perform();
-            System.out.println("(Stale Exception) - Action moved and clicked on the following element, using By locator: "+ "<" + element.toString() + ">");
+            System.out.println("(Stale Exception) - Action moved and clicked on the following element, using By locator: " + "<" + element.toString() + ">");
         } catch (Exception e) {
             System.out.println("Unable to Action Move and Click on the WebElement using by locator: " + "<" + element.toString() + ">");
             Assert.fail("Unable to Action Move and Click on the WebElement using by locator, Exception: " + e.getMessage());
@@ -142,7 +143,7 @@ public class BasePage extends DriverFactory {
         try {
             this.waitUntilWebElementIsVisible(element);
             element.sendKeys(textToSend);
-            System.out.println("Successfully Sent the following keys: '" + textToSend + "' to element: " + "<"+ element.toString() + ">");
+            System.out.println("Successfully Sent the following keys: '" + textToSend + "' to element: " + "<" + element.toString() + ">");
         } catch (Exception e) {
             System.out.println("Unable to locate WebElement: " + "<" + element.toString() + "> and send the following keys: " + textToSend);
             Assert.fail("Unable to send keys to WebElement, Exception: " + e.getMessage());
@@ -279,7 +280,7 @@ public class BasePage extends DriverFactory {
         try {
             String url = driver.getCurrentUrl();
             this.wait.until(ExpectedConditions.urlMatches(urlToWaitFor));
-            System.out.println("The current URL was: " + url + ", " + "navigated and waited for the following URL: "+ urlToWaitFor);
+            System.out.println("The current URL was: " + url + ", " + "navigated and waited for the following URL: " + urlToWaitFor);
             return urlToWaitFor;
         } catch (Exception e) {
             System.out.println("Exception! waiting for the URL: " + urlToWaitFor + ",  Exception: " + e.getMessage());
@@ -349,14 +350,14 @@ public class BasePage extends DriverFactory {
     /***EXTENT REPORTS************/
     //this method names the screenshots with the date
     //sometimes there's an issue saving special characters ":" and " " so we are replacing them with "_"
-   public static String returnDateStamp(String fileExtension) {
+    public static String returnDateStamp(String fileExtension) {
         Date d = new Date();
         String date = d.toString().replace(":", "_").replace(" ", "_") + fileExtension;
         return date;
     }
 
     public static void captureScreenshot() throws IOException {
-        File srcFile = ((TakesScreenshot)driver).getScreenshotAs(OutputType.FILE);
+        File srcFile = ((TakesScreenshot) driver).getScreenshotAs(OutputType.FILE);
 
         screenshotName = returnDateStamp(".jpg");
 
@@ -364,10 +365,11 @@ public class BasePage extends DriverFactory {
 
         Reporter.addStepLog("Taking a screenshot!");
         Reporter.addStepLog("<br>");
-        Reporter.addStepLog("<a target=\"_blank\", href="+ returnScreenshotName() + "><img src="+ returnScreenshotName()+ " height=200 width=300></img></a>");
+        Reporter.addStepLog("<a target=\"_blank\", href=" + returnScreenshotName() + "><img src=" + returnScreenshotName() + " height=200 width=300></img></a>");
     }
 
-    public static String returnScreenshotName(){
+    public static String returnScreenshotName() {
+
         return ("imgs/" + screenshotName);
     }
 
@@ -375,17 +377,16 @@ public class BasePage extends DriverFactory {
         InputStream is = null;
         OutputStream os = null;
 
-        try{
+        try {
             is = new FileInputStream(source);
             os = new FileOutputStream(dest);
             byte[] buffer = new byte[1024];
             int length;
 
-            while((length = is.read(buffer)) > 0 ){
+            while ((length = is.read(buffer)) > 0) {
                 os.write(buffer, 0, length);
             }
-        }
-        finally{
+        } finally {
             is.close();
             os.close();
         }

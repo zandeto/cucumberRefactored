@@ -13,9 +13,7 @@ public class MasterHooks extends DriverFactory {
     @Before
     public void setup() {
         getDriver();
-
     }
-
 
     @After
     public void tearDown(Scenario scenario) {
@@ -29,12 +27,9 @@ public class MasterHooks extends DriverFactory {
             if (driver != null ){
                 driver.manage().deleteAllCookies();
                 driver.quit();
-
             }
         } catch (Exception e) {
             System.out.println("Methods failed: tearDown, Exception: " + e.getMessage());
         }
     }
-
-
 }

@@ -2,18 +2,18 @@ package stepsDefinitions;
 
 
 import cucumber.api.DataTable;
-
 import cucumber.api.java.en.*;
-import org.junit.Assert;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebElement;
 import utils.DriverFactory;
-
 import java.io.IOException;
-import java.util.List;
+
 
 
 public class ContactUsSteps extends DriverFactory {
+
+    @Given("^Print this first$")
+    public void printThisFirst() {
+        System.out.println("First I print this" + "\n");
+    }
 
 
     @Given("^I access webdriveruniversity contact us form$")
