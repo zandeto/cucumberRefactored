@@ -9,4 +9,4 @@ Feature: Products page
     Examples:
       | url                                                                | button                    |
       | http://www.webdriveruniversity.com/Page-Object-Model/products.html | #container-special-offers |
-      | http://www.webdriveruniversity.com/Page-Object-Model/products.html | #container-product       |
+      | http://www.webdriveruniversity.com/Page-Object-Model/products.html | #container-product        |
