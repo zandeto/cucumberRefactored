@@ -20,7 +20,7 @@ public class MasterHooks extends DriverFactory {
         try {
             if(driver != null && scenario.isFailed()){
                 scenario.embed(((TakesScreenshot) driver).getScreenshotAs(OutputType.BYTES), "image/png");
-                BasePage.captureScreenshot();
+                //BasePage.captureScreenshot();
                 driver.manage().deleteAllCookies();
                 driver.quit();
             }
